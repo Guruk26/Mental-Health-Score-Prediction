@@ -1,6 +1,14 @@
-(() => {
+const form = document.getElementById("predictionForm");
+
+const predictButton =
+document.getElementById("predictButton");
+
+const buttonText =
+document.getElementById("buttonText");
+
+const loader =(() => {
   "use strict";
-  const API_BASE = "http://127.0.0.1:8000/";
+  const API_BASE = "https://mental-health-prediction-4lij.onrender.com";
 
   const form = document.getElementById("predict-form");
   const submitBtn = document.getElementById("submit-btn");
