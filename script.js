@@ -8,7 +8,7 @@ document.getElementById("buttonText");
 
 const loader =(() => {
   "use strict";
-  const API_BASE = "https://mental-health-prediction-qca5.onrender.com";
+  const API_BASE = "https://mental-health-score-prediction-zp2c.onrender.com";
 
   const form = document.getElementById("predict-form");
   const submitBtn = document.getElementById("submit-btn");
