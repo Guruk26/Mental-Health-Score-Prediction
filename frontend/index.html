@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindScope | Wellness Prediction</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">✦</span><span>MindScope<small>WELLNESS INSIGHTS</small></span></a>
+    <div class="status"><span class="status-dot"></span> Prediction service <strong id="api-status">Not checked</strong></div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <div class="eyebrow">PERSONAL WELLNESS • ML-POWERED</div>
+      <h1>Understand your<br><span>wellness signal.</span></h1>
+      <p>Enter your lifestyle and study details to receive a model-generated score. This tool provides an estimate, not a clinical assessment.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="panel form-panel">
+        <div class="panel-heading">
+          <div><span class="step">01 / YOUR DETAILS</span><h2>Tell us about your routine</h2></div>
+          <span class="required-note">* Required</span>
+        </div>
+        <form id="prediction-form">
+          <div class="form-grid">
+            <label>Age *<input name="age" type="number" min="10" max="100" placeholder="e.g. 21" required /></label>
+            <label>Gender *<select name="gender" required><option value="">Choose</option><option>Male</option><option>Female</option></select></label>
+            <label>Country *<input name="country" list="countries" placeholder="Select or type country" required /><datalist id="countries"><option>India</option><option>USA</option><option>Canada</option><option>Australia</option><option>UK</option><option>Germany</option><option>Mexico</option><option>Turkey</option><option>France</option><option>Other</option></datalist></label>
+            <label>Academic level *<select name="academic_level" required><option value="">Choose</option><option>Undergraduate</option><option>Graduate</option><option>High School</option></select></label>
+            <label>Most-used platform *<select name="most_used_platform" required><option value="">Choose platform</option><option>Facebook</option><option>LinkedIn</option><option>Instagram</option><option>Snapchat</option><option>Twitter</option><option>YouTube</option><option>TikTok</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option><option>WhatsApp</option><option>WeChat</option></select></label>
+            <label>Primary purpose *<select name="purpose_of_use" required><option value="">Choose purpose</option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select></label>
+            <label>Average daily usage (hours) *<input name="avg_daily_usage_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 4.5" required /></label>
+            <label>Daily phone unlocks *<input name="daily_unlocks" type="number" min="0" step="1" placeholder="e.g. 60" required /></label>
+            <label>Study hours per day *<input name="study_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 5" required /></label>
+            <label>Physical activity (hours/day) *<input name="physical_activity_hours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 0.7" required /></label>
+            <label>Sleep per night (hours) *<input name="sleep_hours_per_night" type="number" min="0" max="24" step="0.1" placeholder="e.g. 7.5" required /></label>
+            <label>Perceived stress level *<select name="stress_level" required><option value="">Choose stress level</option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select></label>
+          </div>
+          <div class="form-footer">
+            <p><span class="asterisk">*</span> All fields are required. Values are sent to your local prediction API.</p>
+            <button id="submit-btn" type="submit"><span>Generate my score</span><span aria-hidden="true">↗</span></button>
+          </div>
+          <p id="form-error" class="message error" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <aside class="panel result-panel">
+        <div class="panel-heading">
+          <div><span class="step">02 / YOUR RESULT</span><h2>Wellness score</h2></div>
+          <span class="result-icon">✧</span>
+        </div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-orbit"><span>✦</span></div>
+          <h3>Your score will appear here</h3>
+          <p>Complete the form and select <b>Generate my score</b> to run your prediction.</p>
+        </div>
+        <div id="loading-state" class="loading-state" hidden>
+          <div class="spinner"></div><h3>Analyzing your details…</h3><p>Connecting to your FastAPI model.</p>
+        </div>
+        <div id="result-state" hidden>
+          <div class="score-area">
+            <div class="score-number"><span id="score-value">—</span><small>/ 10</small></div>
+            <div class="meter" role="meter" aria-label="Predicted score" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+              <div class="meter-track"><div id="meter-fill" class="meter-fill"></div></div>
+              <div class="meter-labels"><span>0</span><span>5</span><span>10</span></div>
+            </div>
+            <div class="score-caption">MODEL-PREDICTED SCORE</div>
+          </div>
+          <div class="interpretation">
+            <span class="interpretation-icon">i</span>
+            <p id="score-explanation">This is the score predicted by the machine-learning model from the information you entered.</p>
+          </div>
+          <div class="result-note"><span>✦</span><p><b>How to read this:</b> The meter shows the numeric output on a 0–10 display scale. The score alone does not establish a diagnosis or determine your overall mental health.</p></div>
+          <button id="reset-btn" class="secondary-button" type="button">Make another prediction <span>↻</span></button>
+        </div>
+        <div class="privacy-note"><span>⌁</span> Use this as an educational estimate, not a substitute for professional support.</div>
+      </aside>
+    </div>
+    <footer>MindScope · Student wellness prediction demo <span>Built with HTML, CSS, JavaScript & FastAPI</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
