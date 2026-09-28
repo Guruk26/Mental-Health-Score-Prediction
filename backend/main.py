@@ -4,8 +4,17 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Literal
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
-model = joblib.load('Mental_Health_Model.pkl')
+# 1. Get the exact folder where main.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Join it with your model file name
+model_path = os.path.join(BASE_DIR, 'Mental_Health_Model.pkl')
+
+# 3. Load the model safely
+model = joblib.load(model_path)
+
 top_countries = ['Other','India','USA','Canada','Australia','UK','Germany','Mexico','Turkey','France']
 
 app = FastAPI()
